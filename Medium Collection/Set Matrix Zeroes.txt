@@ -1,0 +1,67 @@
+//几乎不使用额外空间（仅增加两个bool变量）空间复杂度为O(1)
+
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+        bool rowZero=false,colZero=false;
+        //确定第一行是否含零
+        for(int i=0;i<matrix[0].size();i++){
+            if(matrix[0][i]==0){
+                rowZero=true;
+                break;
+            }
+        }
+        //确定第一列是否含零
+        for(int i=0;i<matrix.size();i++){
+            if(matrix[i][0]==0){
+                colZero=true;
+                break;
+            }
+        }
+        //判断每行是否含零，含零则在第一列标识//除去第一行第一列是因为如果第一行第一列含有0则其在所在位置可认为已正确标识
+        for(int i=1;i<matrix.size();i++){
+            for(int j=1;j<matrix[0].size();j++){
+                if(matrix[i][j]==0){
+                    matrix[i][0]=0;
+                    break;
+                }
+            }
+        }
+        //判断每列是否含零，含零则在第一行标识//除去第一行第一列是因为如果第一行第一列含有0则其在所在位置可认为已正确标识
+        for(int i=1;i<matrix[0].size();i++){
+            for(int j=1;j<matrix.size();j++){
+                if(matrix[j][i]==0){
+                    matrix[0][i]=0;
+                    break;
+                }
+            }
+        }
+        //根据第一列情况对整个矩阵的行进行置零//不能包含第一行，因为下一步需要根据第一行的数据！（第一行第一列在最后会单独处理）
+        for(int i=1;i<matrix.size();i++){
+            if(matrix[i][0]==0){
+                for(int j=1;j<matrix[0].size();j++){
+                    matrix[i][j]=0;
+                }
+            }
+        }
+        //根据第一行情况对整个矩阵的列进行置零
+        for(int i=1;i<matrix[0].size();i++){
+            if(matrix[0][i]==0){
+                for(int j=1;j<matrix.size();j++){
+                    matrix[j][i]=0;
+                }
+            }
+        }
+        //根据rowZeroh和colZero置零第一行和第一列
+        if(rowZero==true){
+            for(int i=0;i<matrix[0].size();i++){
+                matrix[0][i]=0;
+            }
+        }
+        if(colZero==true){
+            for(int i=0;i<matrix.size();i++){
+                matrix[i][0]=0;
+            }
+        }
+    }
+};
