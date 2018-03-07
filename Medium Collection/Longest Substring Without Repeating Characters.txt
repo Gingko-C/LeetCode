@@ -1,0 +1,24 @@
+//思路：滑动窗口算法(Slide Window Algorithm)
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        if(s.size()==0) return 0;
+        int l=0,r=1;
+        unordered_set<char> pool;
+        pool.insert(s[l]);
+        int maxLength=1;
+        while(r<s.size()){
+            if(pool.count(s[r])!=0){
+                pool.erase(s[l]);
+                l++;
+            }
+            else{
+                pool.insert(s[r]);
+                maxLength=max(maxLength,(int)pool.size());
+                r++;
+            }
+        }
+        return maxLength;
+    }
+};
