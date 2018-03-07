@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        vector<vector<string>> res;
+        unordered_map<string,vector<string>> m;
+        for(string str:strs){
+            vector<int> cn(26,0);
+            string s="";
+            for(char c:str){
+                ++cn[c-'a'];
+            }
+            for(int n:cn){
+                s+=to_string(n);
+            }
+            s+="\0";
+            m[s].push_back(str);
+        }
+        for(auto a:m){
+            res.push_back(a.second);
+        }
+        return res;
+    }
+};
