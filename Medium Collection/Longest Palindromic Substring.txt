@@ -1,0 +1,30 @@
+//我的解法
+//参考滑窗算法的思路
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        string res="";
+        if(s.size()!=0) res+=s[0];
+        int lb=0,rb=1;
+        int maxlength=1;
+        while(lb<s.size()-1 && rb<s.size()){
+            int l=lb,r=rb;
+            while(s[l]==s[r]){
+                if(r-l+1>maxlength){
+                    maxlength=r-l+1;
+                    string temp="";
+                    for(int i=l;i<=r;i++){
+                    temp+=s[i];
+                    }
+                    res=temp;
+                }
+                l--;
+                r++;
+                if(l<0 || r>=s.size()) break;
+            }
+            if(rb-lb>1) lb++;
+            else if(rb-lb==1) rb++;
+        }
+        return res;
+    }
+};
