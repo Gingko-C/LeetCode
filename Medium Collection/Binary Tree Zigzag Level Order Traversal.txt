@@ -1,0 +1,35 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+//迭代器逻辑借鉴于Binary Tree Inorder Traversal，增加layer用于记录层次
+class Solution {
+public:
+    vector<vector<int>> res;
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+        iterator_left(root,0);
+        iterator_right(root,0);
+        return res;
+    }
+    void iterator_left(TreeNode* root,int layer) {
+        if(root == NULL) return;
+        vector<int> empty;
+        if(res.size()<(layer+1)) res.push_back(empty);
+        iterator_left(root->left, layer + 1);
+        if(layer % 2 == 0) res[layer].push_back(root->val);
+        iterator_left(root->right, layer + 1);
+    } 
+    void iterator_right(TreeNode* root,int layer){
+        if(root == NULL) return;
+        vector<int> empty;
+        if(res.size()<(layer+1)) res.push_back(empty);
+        iterator_right(root->right, layer + 1);
+        if(layer % 2 == 1) res[layer].push_back(root->val);
+        iterator_right(root->left, layer + 1);
+    }
+};

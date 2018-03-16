@@ -1,0 +1,24 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+//中序遍历：迭代器逻辑：按顺序：存在左结点则迭代左结点 然后输出自己 存在右结点则迭代右结点
+class Solution {
+public:
+    vector<int> order;
+    vector<int> inorderTraversal(TreeNode* root) {
+        iterator(root);
+        return order;
+    }
+    void iterator(TreeNode* root){
+        if(root == NULL) return;
+        iterator(root->left);
+        order.push_back(root->val);
+        iterator(root->right);
+    }
+};
