@@ -1,0 +1,28 @@
+//用时0ms，战胜100%？迷之高效，感觉可能是遇到BUG
+class Solution {
+public:
+    vector<string> alphaBet={" ","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    vector<string> res;
+    vector<string> letterCombinations(string digits) {
+        if(digits.size()==0) return res;
+        string temp="";
+        int n=digits[0]-'0';
+        for(int i=0;i<alphaBet[n].size();i++){
+            iterator(digits,0,i,temp);
+        }
+        return res;
+    }
+    void iterator(string digits,int s,int i,string temp){
+        int n=digits[s]-'0';
+        temp+=alphaBet[n][i];
+        if(s+1<digits.size()){
+            n=digits[s+1]-'0';
+            for(int j=0;j<alphaBet[n].size();j++){
+                iterator(digits,s+1,j,temp);
+            }
+        }
+        else{
+            res.push_back(temp);
+        }
+    }
+};
