@@ -1,0 +1,23 @@
+//迭代完成不确定层数的循环嵌套，本答案效率不够高值得改进
+class Solution {
+public:
+    vector<vector<int>> res;
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<int> ores;
+        res.push_back(ores);
+	    for (int j = 1; j <= nums.size(); j++) {
+		    for (int i = 0; i < nums.size(); i++) {
+		    	vimaker(nums, i, j, ores);
+		    }
+	    }
+        return res;
+    }
+    void vimaker(vector<int> &nums, int o, int n, vector<int> ores) {
+	    if (nums.size() - o < n) return;
+	    ores.push_back(nums[o]);
+	    if (n == 1) { res.push_back(ores); return; }
+	    for (int i = o+1; i < nums.size(); i++) {
+		    vimaker(nums, i, n - 1, ores);
+	    }
+    }
+};

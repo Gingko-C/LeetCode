@@ -1,0 +1,29 @@
+class Solution {
+public:
+    vector<vector<string>> res; 
+    
+    vector<string> generateParenthesis(int n) {
+        res.push_back(vector<string>(1,""));
+        for(int i=1;i<=n;i++){
+            string temps="";
+            smaker(i,i,temps);
+        }
+        return res[n];
+    }
+
+    void smaker(int n_all,int n,string temps){
+        if (n == 0) {
+		    if (res.size() == n_all) {
+			    res.push_back(vector<string>(1, temps));
+		    }
+		    else res[n_all].push_back(temps);
+	    }
+        for(int u=n;u>=1;u--){
+            for(int i=0;i<res[u-1].size();i++){
+                string temps_t=temps;
+                temps_t+="("+res[u-1][i]+")";
+                smaker(n_all,n-u,temps_t);
+            }
+        }
+    }
+};

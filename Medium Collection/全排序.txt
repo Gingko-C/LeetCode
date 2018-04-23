@@ -1,0 +1,20 @@
+//超过92%？ 
+class Solution {
+public:
+    vector<vector<int>> res;
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<int> ores;
+        iterator(nums,ores);
+        return res;
+    }
+    void iterator(vector<int> &nums,vector<int> &ores){
+        if(nums.size()==0) res.push_back(ores);
+        for(int i=0;i<nums.size();i++){
+            vector<int> nums_t=nums;
+            vector<int> ores_t=ores;
+            ores_t.push_back(nums_t[i]);
+            nums_t.erase(nums_t.begin()+i);
+            iterator(nums_t,ores_t);
+        }
+    }
+};
