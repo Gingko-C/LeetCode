@@ -1,0 +1,21 @@
+//超过83%
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        int temp = 0;
+	    map<int, int> num_times;
+	    priority_queue<pair<int,int>> pq;//优先队列，默认大的元素在前，此处pair.first为基准
+	    vector<int> res;
+	    for (int i : nums) num_times[i]++;
+        for (auto k : num_times) pq.push(pair<int, int>(k.second, k.first));
+	    while (k != 0) {
+		    temp = pq.top().first;
+		    res.push_back(pq.top().second);
+		    pq.pop();
+            if (pq.size() == 0) break;//输入为[1] 1 不加此句会导致访问不存在的pq.top()
+ 		    if (k > 1)k--;//[2,2,1,1,3,4,5] 2 不加此句第一为2，1 第二包含剩余全部 如第一名已经有超过2个则无第二名
+		    else if (temp != pq.top().first) k--;
+	    }
+        return res;
+    }
+};
