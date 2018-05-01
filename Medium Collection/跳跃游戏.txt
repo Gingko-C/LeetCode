@@ -1,0 +1,17 @@
+//动态规划值dp为每个位置的最大移动能力，maxmove=前一位置maxmove-1和当前位置移动能力的最大值。 超过92%
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        vector<int> dp;
+        if(nums.size()==1)return true;
+        if(nums[0]==0) return false;
+        dp.push_back(nums[0]);
+        int maxmove=0;
+        for(int i=1;i<nums.size()-1;i++){
+            maxmove=max(dp[i-1]-1,nums[i]);
+            dp.push_back(maxmove);
+            if(maxmove<1) return false;
+        }
+        return true;
+    }
+};
