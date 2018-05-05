@@ -1,0 +1,21 @@
+//战胜1% 是否思路有问题？ 需要再做。
+class Solution {
+public:
+    int coinChange(vector<int>& coins, int amount) {
+        unordered_map<int,int> leastCoins;
+        if(amount==0) return 0;
+        for(int i:coins){
+            leastCoins[i]=1;
+        }
+        for(int i=1;i<=amount;i++){
+            if(leastCoins[i]!=0) continue;
+            leastCoins[i]=INT_MAX;
+            for(int j:coins){
+                if(i<j || leastCoins[i-j]==-1) continue;
+                leastCoins[i]=min(leastCoins[i],leastCoins[i-j]+1);
+            }
+            if(leastCoins[i]==INT_MAX) leastCoins[i]=-1;
+        }
+        return leastCoins[amount];
+    }
+};
