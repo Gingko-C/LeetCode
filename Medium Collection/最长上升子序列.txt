@@ -1,0 +1,19 @@
+//%58
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        vector<int> maxval(nums.size(),1);
+        int maxvalofall=1;
+        if(nums.size() == 1) return 1;
+        if(nums.size() == 0) return 0;
+        for(int i=1;i<nums.size();i++){
+            for(int j=i;j>=0;j--){
+                if(nums[i]>nums[j]){
+                    maxval[i]=max(maxval[j]+1,maxval[i]);
+                    maxvalofall=max(maxval[i],maxvalofall);
+                }
+            }
+        }
+        return maxvalofall;
+    }
+};
