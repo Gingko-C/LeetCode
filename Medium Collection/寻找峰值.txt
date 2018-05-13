@@ -1,0 +1,49 @@
+//99.21%
+class Solution {
+public:
+    int findPeakElement(vector<int>& nums) {
+        int mid = nums.size()/2;
+        if(nums.size()== 2){
+            if(nums[mid]>nums[mid-1]) return mid;
+            else return mid-1;
+        }
+        if(nums.size()== 1){
+            return 0;
+        }
+        int res;
+        if(nums[mid]>nums[mid+1]) {
+            vector<int> newv(nums.begin(),nums.begin()+mid+1);
+            res = findPeakElement(newv);
+            mid = res;
+        }
+        else if(nums[mid]<nums[mid+1]) {
+            vector<int> newv(nums.begin()+mid,nums.end());
+            res = findPeakElement(newv);
+            mid += res;
+        }
+        return mid;
+    }
+};
+//16%? 去掉了中间变量为啥差距这么大
+class Solution {
+public:
+    int findPeakElement(vector<int>& nums) {
+        int mid = nums.size()/2;
+        if(nums.size()== 2){
+            if(nums[mid]>nums[mid-1]) return mid;
+            else return mid-1;
+        }
+        if(nums.size()== 1){
+            return 0;
+        }
+        if(nums[mid]>nums[mid+1]) {
+            vector<int> newv(nums.begin(),nums.begin()+mid+1);
+            mid = findPeakElement(newv);
+        }
+        else if(nums[mid]<nums[mid+1]) {
+            vector<int> newv(nums.begin()+mid,nums.end());
+            mid += findPeakElement(newv);
+        }
+        return mid;
+    }
+};
