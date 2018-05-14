@@ -1,0 +1,35 @@
+//98%
+/**
+ * Definition for an interval.
+ * struct Interval {
+ *     int start;
+ *     int end;
+ *     Interval() : start(0), end(0) {}
+ *     Interval(int s, int e) : start(s), end(e) {}
+ * };
+ */
+class Solution {
+public:
+    vector<Interval> merge(vector<Interval>& intervals) {
+        if(intervals.size()==0) return vector<Interval>();
+        sort(intervals.begin(),intervals.end(),[](Interval &lhs,Interval &rhs){return lhs.start<rhs.start;});
+        vector<Interval> res;
+        Interval temp(-1,-1);
+        for(int i=0;i<intervals.size();i++){
+            if(temp.start<=intervals[i].start && temp.end>=intervals[i].end) continue;
+            if(temp.start<=intervals[i].start && temp.end>=intervals[i].start){
+                temp.end=max(intervals[i].end,temp.end);
+                continue;
+            }
+            if(temp.end>=intervals[i].start){
+                //temp.start=intervals[i].start;
+                temp.end=max(intervals[i].end,intervals[i+1].end);
+                continue;
+            }
+            if(temp.start!=-1) res.push_back(temp);
+            temp =intervals[i];
+        }
+        res.push_back(temp);
+        return res;
+    }
+};
