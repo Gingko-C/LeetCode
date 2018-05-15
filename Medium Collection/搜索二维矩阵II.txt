@@ -1,0 +1,39 @@
+//耗时1500ms 有几率超时，应该有什么问题，需要再看
+class Solution {
+public:
+    int searchLine(vector<int> &line,int target){
+        int mid = line.size()/2;
+        if(line[mid]==target) return mid;
+        if(line.size()==1){
+            if(line[0]<target) return 0;
+            else return -1;
+        }
+        if(line[mid]<target){
+            vector<int> temp(line.begin()+mid,line.end());
+            int sea = searchLine(temp,target);
+            if(sea==-1) return -1;
+            else return mid+sea;
+        }
+        if(line[mid]>target){
+            vector<int> temp(line.begin(),line.begin()+mid);
+            int sea = searchLine(temp,target);
+            return sea;
+        }
+    }
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        if(matrix.size()==0 || matrix[0].size()==0) return false;
+        bool res = false;
+        int pos=matrix[0].size();
+        for(int i=0;i<matrix.size();i++){
+            vector<int> line(matrix[i].begin(),matrix[i].begin()+pos);
+            int found = searchLine(matrix[i],target);
+            if(found==-1) break;
+            if(matrix[i][found]==target) {
+                res=true;
+                break;
+            }
+            else pos = found;
+        }
+        return res;
+    }
+};
