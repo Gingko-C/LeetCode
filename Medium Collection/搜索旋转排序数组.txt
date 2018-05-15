@@ -1,0 +1,54 @@
+//94.62%
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int mid = nums.size()/2;
+        if(nums.size()==0) return -1;
+        if(nums[mid]==target) return mid;
+        if(nums.size()==1) return -1;
+        if(nums[mid]<target) {
+            if(nums[mid]>nums.front()){
+                vector<int> temp(nums.begin()+mid+1,nums.end());
+                int sea = search(temp,target);
+                if(sea == -1) return -1;
+                else return mid+sea+1;
+            }
+            if(nums[mid]<nums.front()){
+                if(nums.back()<target){
+                    vector<int> temp(nums.begin(),nums.begin()+mid);
+                    int sea = search(temp,target);
+                    if(sea == -1) return -1;
+                    else return sea;
+                }
+                else {
+                    vector<int> temp(nums.begin()+mid+1,nums.end());
+                    int sea = search(temp,target);
+                    if(sea == -1) return -1;
+                    else return mid+sea+1;
+                }
+            }           
+        }
+        if(nums[mid]>target){
+            if(nums[mid]>nums.front()){
+                if(nums[0]>target){
+                    vector<int> temp(nums.begin()+mid+1,nums.end());
+                    int sea = search(temp,target);
+                    if(sea == -1) return -1;
+                    else return mid+sea+1;
+                }
+                else {
+                    vector<int> temp(nums.begin(),nums.begin()+mid);
+                    int sea = search(temp,target);
+                    if(sea == -1) return -1;
+                    else return sea;
+                }
+            }
+            if(nums[mid]<nums.front()){
+                vector<int> temp(nums.begin(),nums.begin()+mid);
+                int sea = search(temp,target);
+                if(sea == -1) return -1;
+                else return sea;
+            }
+        }
+    }
+};
