@@ -1,0 +1,39 @@
+//%99.4
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        vector<int> res(2,-1);
+        if(nums.size()==0 || nums.back()<target || nums.front()>target) return res;
+        int mid = nums.size()/2;
+        if(nums.size()==1 && nums[0]!=target) return res;
+        if(nums[mid]>target){
+            vector<int> newv(nums.begin(),nums.begin()+mid);
+            res = searchRange(newv,target);
+        }
+        if(nums[mid]<target){
+            vector<int> newv(nums.begin()+mid+1,nums.end());
+            res = searchRange(newv,target);
+            if(res!=vector<int>(2,-1)){
+                res[0] = res[0]+mid+1;
+                res[1] = res[1]+mid+1; 
+            }
+        }
+        if(nums[mid]==target){
+            int temp = mid;
+            while(temp>=0){
+                if(nums[mid]==nums[temp]){
+                    res[0]=temp;
+                }
+                temp--;
+            }
+            temp = mid;
+            while(temp<nums.size()){
+                if(nums[mid]==nums[temp]){
+                    res[1]=temp;
+                }
+                temp++;
+            }
+        }
+        return res;
+    }
+};
