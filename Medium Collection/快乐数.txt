@@ -1,0 +1,21 @@
+//75.57%
+class Solution {
+public:
+    int squareSum(int n){
+        int sum = 0;
+        string n_str=to_string(n);
+        for(char c:n_str){
+            sum+=pow(c-48,2);
+        }
+        return sum;
+    }
+    bool isHappy(int n) {
+        unordered_set<int> uli;
+        while(true){
+            if(n==1) return true;
+            if(uli.find(n)!=uli.end()) return false;
+            uli.insert(n);
+            n = squareSum(n);
+        }
+    }
+};
