@@ -1,0 +1,13 @@
+//n/5得到n中包含因子5的数量，再/5得到n中包含因子25的数量.....全求和得到末尾零的数量
+//非原创
+class Solution {
+public:
+    int trailingZeroes(int n) {
+        int zeroNum = 0;
+        while(n){
+            n=n/5;
+            zeroNum+=n;
+        }
+        return zeroNum;
+    }
+};
