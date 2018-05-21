@@ -1,0 +1,15 @@
+//20ms 较差 需改
+class Solution {
+public:
+    double myPow(double x, int n) {
+        double pow_res=1;
+        for(int i=1;i<=fabs(n);i++){
+            pow_res*=fabs(x);
+            if(pow_res==0 || pow_res==1) break;
+            if(double(1/pow_res)==0) return 0;
+        }
+        if(x<0 && n%2==1) pow_res=-pow_res;
+        if(n>0) return pow_res;
+        return double(1/pow_res);
+    }
+};
