@@ -1,0 +1,16 @@
+//98.64% 二分法
+class Solution {
+public:
+    int findsqrt(int b,int e,int x){
+        if(b-e==0) return b;
+        if(x==1) return 1;
+        if(e-b==1) return b;
+        long mid=(b+e)/2;
+        if(mid*mid>x) return findsqrt(b,mid,x);
+        if(mid*mid<x) return findsqrt(mid,e,x);
+        return mid;
+    }
+    int mySqrt(int x) {
+        return findsqrt(0,x,x);
+    }
+};
