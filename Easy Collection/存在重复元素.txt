@@ -1,0 +1,10 @@
+//84% 先sort排序 再用unique将相邻相同项移至尾部，unique返回未重复部分的尾后指针。
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        auto end_unique = unique(nums.begin(),nums.end());
+        if(end_unique!=nums.end()) return true;
+        return false;
+    }
+};
