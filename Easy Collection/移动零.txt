@@ -1,0 +1,7 @@
+//89.1% 最短解法？
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        stable_sort(nums.begin(),nums.end(),[](const int a,const int b){return b==0;});
+    }
+};
