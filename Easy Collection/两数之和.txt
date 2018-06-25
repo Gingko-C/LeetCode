@@ -1,0 +1,19 @@
+//44%
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> vi;
+        for(int i=0;i<nums.size();i++){
+            auto res = find(nums.begin(),nums.end(),target-nums[i]);
+            if(res!=nums.end()){
+                int nums_end=res-nums.begin();
+                if(nums_end!=i){
+                    vi.push_back(min(i,nums_end));
+                    vi.push_back(max(i,nums_end));
+                    break;
+                }
+            } 
+        }
+    return vi;
+    }
+};
