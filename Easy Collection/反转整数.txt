@@ -1,0 +1,13 @@
+//90.3%
+class Solution {
+public:
+    int reverse(int x) {
+        string s=to_string(x);
+        string s_r(s.rbegin(),s.rend());
+        long int res=stol(s_r);
+        if(res>2147483647) return 0;
+        if(res<-2147483648) return 0;
+        if(x<0) return -res;
+        return res;
+    }
+};
