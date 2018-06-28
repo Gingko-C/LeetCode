@@ -1,0 +1,14 @@
+//30%
+class Solution {
+public:
+	int firstUniqChar(string s) {
+		map<char, int> mci;
+		for (char c : s) {
+			mci[c]++;
+		}
+		for (int i = 0;i < s.size();i++) {
+			if (mci[s[i]] == 1) return i;
+		}
+		return -1;
+	}
+};
