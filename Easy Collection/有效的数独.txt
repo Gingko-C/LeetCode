@@ -1,0 +1,43 @@
+//67%
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        map<char,int> mx,my,mo1,mo2,mo3;
+        for(int i=0;i<9;i++){
+            for(int j=0;j<9;j++){
+                if(board[i][j]!='.'){
+                    if(++mx[board[i][j]]>1) return false;
+                }
+                if(board[j][i]!='.'){
+                    if(++my[board[j][i]]>1) return false;
+                }
+            }
+            mx.clear();
+            my.clear();
+        }
+        for(int k=0;k<=6;k+=3){
+            for(int i=0+k;i<3+k;i++){
+                for(int j=0;j<3;j++){
+                    if(board[i][j]!='.'){
+                        if(++mo1[board[i][j]]>1) return false;
+                    }
+                }
+                for(int j=3;j<6;j++){
+                    if(board[i][j]!='.'){
+                        if(++mo2[board[i][j]]>1) return false;
+                    }
+                }
+                for(int j=6;j<9;j++){
+                    if(board[i][j]!='.'){
+                        if(++mo3[board[i][j]]>1) return false;
+                    }
+                }
+            }
+            mo1.clear();
+            mo2.clear();
+            mo3.clear();
+        }
+        
+        return true;
+    }
+};
