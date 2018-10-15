@@ -1,0 +1,89 @@
+/**
+给定两个大小为 m 和 n 的有序数组 nums1 和 nums2 。
+
+请找出这两个有序数组的中位数。要求算法的时间复杂度为 O(log (m+n)) 。
+
+你可以假设 nums1 和 nums2 不同时为空。
+
+示例 1:
+
+nums1 = [1, 3]
+nums2 = [2]
+
+中位数是 2.0
+示例 2:
+
+nums1 = [1, 2]
+nums2 = [3, 4]
+
+中位数是 (2 + 3)/2 = 2.5
+*/
+class Solution {
+public:
+   double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+	int num = nums1.size() + nums2.size();
+	int mid = (num + 1) / 2;
+	int cnt = 0, a = 0, b = 0;
+	double res = 0;
+	while (a<nums1.size()&&b<nums2.size()) {
+		if (nums1[a] < nums2[b]) {
+			cnt++;
+			if (cnt == mid) {
+				res = nums1[a];
+				if (num % 2 == 1) break;
+			}
+			if (cnt > mid) {
+				res += nums1[a];
+				res /= 2;
+				break;
+			}
+			a++;
+		}
+		else {
+			cnt++;
+			if (cnt == mid) {
+				res = nums2[b];
+				if (num % 2 == 1) break;
+			}
+			if (cnt > mid) {
+				res += nums2[b];
+				res /= 2;
+				break;
+			}
+			b++;
+		}
+	}
+	if (cnt < mid || (cnt == mid && num % 2 == 0)) {
+		while (1) {
+			if (a < nums1.size()) {
+				cnt++;
+				if (cnt == mid) {
+					res = nums1[a];
+					if (num % 2 == 1) break;
+				}
+				if (cnt > mid) {
+					res += nums1[a];
+					res /= 2;
+					break;
+				}
+				a++;
+			}
+			if (b < nums2.size()) {
+				cnt++;
+				if (cnt == mid) {
+					res = nums2[b];
+					if (num % 2 == 1) break;
+				}
+				if (cnt > mid) {
+					res += nums2[b];
+					res /= 2;
+					break;
+				}
+				b++;
+			}
+		}
+	}
+	
+	return res;
+}
+};
